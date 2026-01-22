@@ -10,6 +10,7 @@ A collection of Microsoft Copilot Studio agents for UK public sector security wo
 |-------|---------|------|
 | **Security Requirements Analyst** | Compare requirements, generate framework-mapped requirements, assess supplier compliance | [View](agents/security-requirements-analyst/) |
 | **Government Assurance Advisor** | GovAssure scoping, CAF assessments, Secure by Design reviews, framework mapping | [View](agents/gov-assurance-advisor/) |
+| **Cloud Security Expert** | Cloud architecture review, threat detection, secure migration, DevSecOps, posture assessment, incident response | [View](agents/cloud-security-expert/) |
 
 ---
 
@@ -48,6 +49,10 @@ These agents reference the following UK government and international security fr
 | NCSC Cloud Security Principles | Cloud Principle [Number] | Cloud Principle 2 |
 | Cyber Essentials / CE+ | — | — |
 | GovS 007 (Security) | — | — |
+| CIS Benchmarks (Cloud) | CIS [Provider] [Benchmark] [Control] | CIS AWS Foundations 1.1 |
+| MITRE ATT&CK Cloud | T[Number] [Technique Name] | T1078.004 Cloud Accounts |
+| CSA Cloud Controls Matrix | CCM [Control ID] | CCM IVS-03 |
+| ISO 27017:2015 | ISO 27017 [Control] | ISO 27017 CLD.6.3 |
 
 See [Framework Quick Reference](docs/framework-quick-reference.md) for detailed mappings and citation guidance.
 
@@ -62,7 +67,10 @@ See [Framework Quick Reference](docs/framework-quick-reference.md) for detailed 
 │   ├── security-requirements-analyst/
 │   │   ├── README.md                      # Setup, validation tests, troubleshooting
 │   │   └── instructions.md                # Copilot Studio instructions
-│   └── gov-assurance-advisor/
+│   ├── gov-assurance-advisor/
+│   │   ├── README.md                      # Setup, validation tests, troubleshooting
+│   │   └── instructions.md                # Copilot Studio instructions
+│   └── cloud-security-expert/
 │       ├── README.md                      # Setup, validation tests, troubleshooting
 │       └── instructions.md                # Copilot Studio instructions
 └── docs/
