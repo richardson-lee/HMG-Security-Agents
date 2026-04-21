@@ -11,6 +11,7 @@ A collection of Microsoft Copilot Studio agents for UK public sector security wo
 | **Security Requirements Analyst** | Compare requirements, generate framework-mapped requirements, assess supplier compliance | [View](agents/security-requirements-analyst/) |
 | **Government Assurance Advisor** | GovAssure scoping, CAF assessments, Secure by Design reviews, framework mapping | [View](agents/gov-assurance-advisor/) |
 | **Cloud Security Expert** | Cloud architecture review, threat detection, secure migration, DevSecOps, posture assessment, incident response | [View](agents/cloud-security-expert/) |
+| **Evidence Tracker Populator** | First-pass fill of the HMG Security Requirements Evidence Tracker from supplier documentation | [View](agents/evidence-tracker-populator/) |
 
 ---
 
@@ -70,7 +71,10 @@ See [Framework Quick Reference](docs/framework-quick-reference.md) for detailed 
 │   ├── gov-assurance-advisor/
 │   │   ├── README.md                      # Setup, validation tests, troubleshooting
 │   │   └── instructions.md                # Copilot Studio instructions
-│   └── cloud-security-expert/
+│   ├── cloud-security-expert/
+│   │   ├── README.md                      # Setup, validation tests, troubleshooting
+│   │   └── instructions.md                # Copilot Studio instructions
+│   └── evidence-tracker-populator/
 │       ├── README.md                      # Setup, validation tests, troubleshooting
 │       └── instructions.md                # Copilot Studio instructions
 └── docs/
@@ -103,6 +107,7 @@ To add a new agent:
 
 | Version | Date | Notes |
 |---------|------|-------|
+| v2.1 | April 2026 | Added Evidence Tracker Populator agent |
 | v2.0 | January 2026 | Restructured as multi-agent repository; added Government Assurance Advisor |
 | v1.1 | January 2026 | Split into README + agent-instructions.md |
 | v1.0 | January 2026 | Initial Security Requirements Analyst release |
