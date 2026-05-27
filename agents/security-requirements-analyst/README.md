@@ -1,26 +1,17 @@
-# Security Requirements Analyst Agent
+# Security Requirements Analyst
 
-A Copilot Studio agent for GRC work: comparing security requirements, generating new requirements mapped to frameworks, and assessing supplier compliance.
+A prompt for GRC work in Microsoft Copilot: comparing security requirements, generating new requirements mapped to frameworks, and assessing supplier compliance.
 
 ---
 
-## Setup
+## How to use
 
-1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/)
-2. Create a new agent
-3. Copy the contents of [`instructions.md`](instructions.md) into the **Instructions** field
-4. (Optional) Upload your baseline security requirements to the agent's **Knowledge**
-5. Publish and share with your team
+1. Open a new Microsoft Copilot chat.
+2. Paste the contents of [`instructions.md`](instructions.md) as your first message.
+3. Attach any baseline requirements, supplier responses, or other documents you want assessed.
+4. Ask a question — see Starter Prompts below.
 
-### Alternative: Paste into Regular Copilot Chat
-
-If agents are disabled in your environment:
-
-1. Open a new chat in Microsoft Copilot
-2. Paste the contents of [`instructions.md`](instructions.md) at the start
-3. Continue chatting — Copilot will follow these instructions for the rest of the session
-
-> **Note**: You'll need to paste the instructions again each time you start a new chat.
+You'll need to paste the prompt again at the start of each new chat.
 
 ---
 
@@ -28,110 +19,81 @@ If agents are disabled in your environment:
 
 | Prompt | What it does |
 |--------|--------------|
-| *"Compare our baseline security requirements against a supplier's security documentation and highlight any gaps."* | Runs a gap analysis (Mode 1) |
-| *"Generate security requirements for a new cloud-hosted system, mapped to the CAF framework."* | Creates requirements with framework mapping (Mode 2) |
-| *"Show me how our CAF-based requirements map to ISO 27002:2022 controls."* | Cross-framework mapping (Mode 4) |
-
----
-
-## Modes
-
-| Mode | Purpose |
-|------|---------|
-| **Compare Requirements** | Gap analysis between two requirement sets |
-| **Generate Requirements** | Create new requirements mapped to frameworks (technical or commercial format) |
-| **Assess Compliance** | Check if supplier docs meet your baseline |
-| **Map Frameworks** | Cross-reference between CAF, ISO 27002, CIS Controls, etc. |
+| *"Compare the attached supplier's security documentation against our baseline requirements and highlight any gaps."* | Gap analysis |
+| *"Generate security requirements for a new cloud-hosted system, mapped to the CAF framework."* | Requirements generation (technical format) |
+| *"Convert those into commercial language for an RFP."* | Requirements generation (commercial format) |
+| *"Review the attached supplier security response against our baseline."* | Compliance assessment |
+| *"Show me how CAF Objective B maps to ISO 27002:2022 and CIS Controls v8."* | Cross-framework mapping |
 
 ---
 
 ## Validation Tests
 
-### Test 1: Basic Comparison (Mode 1)
+### Test 1: Basic Comparison
 ```
-Compare the following supplier security requirements against our baseline requirements. Identify any gaps.
+Compare these supplier requirements against our baseline. Identify any gaps.
+[Paste 5-10 supplier requirements]
+```
+**Expected**: Table with baseline mapping, status, evidence citations. Asks which is baseline if unclear.
 
-[Paste a short set of 5-10 supplier requirements]
+### Test 2: Framework Citation
 ```
-**Expected**: Table with baseline mapping, status assessment, evidence citations. Should ask which is baseline if unclear.
+What CAF requirements apply to cloud-hosted CRM systems?
+```
+**Expected**: Specific CAF clause references (e.g., "CAF B2.a"), not vague statements.
 
-### Test 2: Framework Citation (Core Rule)
+### Test 3: Technical Requirements
 ```
-What security requirements from the CAF apply to cloud-hosted CRM systems?
+Generate draft security requirements from the CAF for assessing Salesforce as a SaaS CRM. Technical format.
 ```
-**Expected**: Specific CAF clause references (e.g., "CAF B2.a", "CAF B4.c"), not vague statements.
+**Expected**: Table with ID, requirement, CAF clause mapping, rationale.
 
-### Test 3: Requirements Generation - Technical (Mode 2)
+### Test 4: Commercial Requirements
 ```
-We are evaluating Salesforce for CRM. Generate draft security requirements from the CAF for assessing this SaaS product. Use technical format.
+Convert those into commercial language for an RFP.
 ```
-**Expected**: Table with ID, requirement statement, CAF clause mapping, rationale.
+**Expected**: Plain language, outcome-focused, no jargon.
 
-### Test 4: Requirements Generation - Commercial (Mode 2)
+### Test 5: Compliance Assessment
 ```
-Convert those Salesforce requirements into commercial language suitable for an RFP.
+Assess whether the attached supplier response meets our baseline. Flag gaps needing clarification.
+[Attach supplier doc]
 ```
-**Expected**: Plain language, outcome-focused statements without technical jargon.
+**Expected**: Summary count, table with evidence quotes, prioritised gap list, clarification questions.
 
-### Test 5: Compliance Assessment (Mode 3)
+### Test 6: Cross-Framework Mapping
 ```
-Review the attached supplier security response and assess whether it meets our baseline requirements. Flag any gaps that need clarification before we proceed.
+Show me how CAF Objective B maps to ISO 27002:2022 and CIS Controls v8.
+```
+**Expected**: Mapping table with specific clause numbers, notes where mappings are approximate.
 
-[Attach a supplier security questionnaire response or design document]
-```
-**Expected**: Summary count, detailed table with evidence quotes, prioritised gap list, clarification questions.
-
-### Test 6: Cross-Framework Mapping (Mode 4)
-```
-Show me how CAF Objective B (Protecting Against Cyber Attack) maps to ISO 27002:2022 and CIS Controls v8.
-```
-**Expected**: Mapping table with specific clause numbers, notes on scope differences.
-
-### Test 7: Uncertainty Handling (Core Rule)
+### Test 7: Uncertainty Handling
 ```
 Does the supplier's proposal meet our requirements for incident response?
+[Attach doc that doesn't mention IR]
+```
+**Expected**: Clear "unable to assess" — no fabrication.
 
-[Provide a document that doesn't mention incident response]
-```
-**Expected**: Should clearly state it cannot assess — should NOT fabricate an answer.
-
-### Test 8: Document Update (if supported)
-```
-Add these three requirements to the attached spreadsheet in the "New Requirements" tab:
-1. [Requirement text]
-2. [Requirement text]
-3. [Requirement text]
-```
-**Expected**: Updates spreadsheet or provides structured output for copy/paste.
-
-### Test 9: Baseline Reference
-```
-What are our standing requirements for third-party access management?
-```
-**Expected**: Should pull from baseline requirements in Knowledge, citing specific IDs or sections.
-
-### Test 10: Edge Case - Ambiguous Request
+### Test 8: Ambiguous Request
 ```
 Compare these requirements.
-
-[Provide only one set of requirements]
+[Provide only one set]
 ```
-**Expected**: Should ask which set is baseline and request the comparison set.
+**Expected**: Asks which is baseline; requests the comparison set.
 
 ---
 
 ## See Also
 
-- [Evidence Tracker Populator](../evidence-tracker-populator/) — once you have assessed a supplier with this agent, use the Evidence Tracker Populator to produce a first-pass fill of the HMG Security Requirements Evidence Tracker.
+Once you've assessed a supplier with this prompt, use the [Evidence Tracker Populator](../evidence-tracker-populator/) to produce a first-pass fill of the HMG Security Requirements Evidence Tracker.
 
 ---
 
 ## Troubleshooting
 
-| Problem | Fix |
-|---------|-----|
-| Not citing specific clauses | Add to instructions: *"You must include the specific clause number for every framework reference."* |
-| Too verbose | Add: *"Keep responses concise. Use tables for structured data."* |
-| Speculating when data is missing | Add: *"Never speculate. If you cannot find evidence, state 'Unable to assess'."* |
-| Wrong framework | Add: *"Use CAF as the primary framework unless I specify otherwise."* |
-| Not asking clarifying questions | Add: *"If my request is ambiguous, ask one clarifying question before proceeding."* |
+| Problem | Add to the prompt |
+|---------|-------------------|
+| Not citing specific clauses | *"You must include the specific clause number for every framework reference."* |
+| Too verbose | *"Keep responses concise. Use tables for structured data."* |
+| Speculating when data is missing | *"Never speculate. If you cannot find evidence, state 'Unable to assess'."* |
+| Wrong framework | *"Use CAF as the primary framework unless I specify otherwise."* |

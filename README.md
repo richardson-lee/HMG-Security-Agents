@@ -1,6 +1,6 @@
 # HMG Security Agents
 
-A collection of Microsoft Copilot Studio agents for UK public sector security work — GovAssure, CAF assessments, Secure by Design reviews, requirements analysis, and more.
+A collection of Microsoft Copilot prompts for UK public sector security work — GovAssure, CAF assessments, Secure by Design reviews, requirements analysis, and more. Each "agent" is a focused system prompt you paste at the start of a Copilot chat.
 
 ---
 
@@ -8,9 +8,9 @@ A collection of Microsoft Copilot Studio agents for UK public sector security wo
 
 | Agent | Purpose | Link |
 |-------|---------|------|
-| **Security Requirements Analyst** | Compare requirements, generate framework-mapped requirements, assess supplier compliance | [View](agents/security-requirements-analyst/) |
-| **Government Assurance Advisor** | GovAssure scoping, CAF assessments, Secure by Design reviews, framework mapping | [View](agents/gov-assurance-advisor/) |
-| **Cloud Security Expert** | Cloud architecture review, threat detection, secure migration, DevSecOps, posture assessment, incident response | [View](agents/cloud-security-expert/) |
+| **Security Requirements Analyst** | Compare requirements, generate framework-mapped requirements, assess supplier compliance, cross-framework mapping (canonical owner) | [View](agents/security-requirements-analyst/) |
+| **Government Assurance Advisor** | GovAssure scoping, CAF assessments, Secure by Design reviews | [View](agents/gov-assurance-advisor/) |
+| **Cloud Security Expert** | Cloud architecture, threat detection, secure migration, DevSecOps, posture assessment, and incident response across AWS, Azure, GCP, M365 | [View](agents/cloud-security-expert/) |
 | **Evidence Tracker Populator** | First-pass fill of the HMG Security Requirements Evidence Tracker from supplier documentation | [View](agents/evidence-tracker-populator/) |
 | **Security Case Populator** | First-pass draft of the DBS Security Case from threat model, design documentation, and requirements evidence | [View](agents/security-case-populator/) |
 
@@ -18,24 +18,13 @@ A collection of Microsoft Copilot Studio agents for UK public sector security wo
 
 ## Quick Start
 
-### Option A: Copilot Studio Agent (Recommended)
+1. Open a new chat in [Microsoft Copilot](https://copilot.microsoft.com/).
+2. Pick an agent from the table above and copy the contents of its `instructions.md`.
+3. Paste it as your first message in the chat.
+4. Attach any relevant documents (supplier responses, design docs, threat models, the evidence tracker template, etc.).
+5. Ask a question — see each agent's README for Starter Prompts.
 
-1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/)
-2. Create a new agent
-3. Choose an agent from the table above and copy its `instructions.md` into the **Instructions** field
-4. (Optional) Upload relevant documents to the agent's **Knowledge**
-5. Publish and share with your team
-
-### Option B: Paste into Regular Copilot Chat
-
-If Copilot Studio agents are disabled in your environment:
-
-1. Open a new chat in Microsoft Copilot
-2. Copy the contents of the relevant `instructions.md` file
-3. Paste it at the start of your conversation
-4. Continue chatting — Copilot will follow these instructions for the session
-
-> **Note**: You'll need to paste the instructions again each time you start a new chat.
+You'll need to paste the prompt again at the start of each new chat.
 
 ---
 
@@ -67,20 +56,13 @@ See [Framework Quick Reference](docs/framework-quick-reference.md) for detailed 
 ├── README.md                              # This file
 ├── agents/
 │   ├── security-requirements-analyst/
-│   │   ├── README.md                      # Setup, validation tests, troubleshooting
-│   │   └── instructions.md                # Copilot Studio instructions
+│   │   ├── README.md                      # How to use, starter prompts, validation tests
+│   │   └── instructions.md                # The prompt to paste into Copilot
 │   ├── gov-assurance-advisor/
-│   │   ├── README.md                      # Setup, validation tests, troubleshooting
-│   │   └── instructions.md                # Copilot Studio instructions
 │   ├── cloud-security-expert/
-│   │   ├── README.md                      # Setup, validation tests, troubleshooting
-│   │   └── instructions.md                # Copilot Studio instructions
 │   ├── evidence-tracker-populator/
-│   │   ├── README.md                      # Setup, validation tests, troubleshooting
-│   │   └── instructions.md                # Copilot Studio instructions
 │   └── security-case-populator/
-│       ├── README.md                      # Setup, validation tests, troubleshooting
-│       └── instructions.md                # Copilot Studio instructions
+│       (each follows the same README + instructions.md pattern)
 └── docs/
     └── framework-quick-reference.md       # CAF, Secure by Design, Five Lenses reference
 ```
@@ -92,18 +74,18 @@ See [Framework Quick Reference](docs/framework-quick-reference.md) for detailed 
 To add a new agent:
 
 1. Create a new folder under `agents/` with a descriptive name
-2. Add `instructions.md` with Copilot Studio instructions
-3. Add `README.md` with setup guide, starter prompts, and validation tests
+2. Add `instructions.md` — the chat-paste prompt
+3. Add `README.md` with how-to-use, starter prompts, and validation tests
 4. Update this README's agent table
 5. Submit a pull request
 
-### Agent Design Guidelines
+### Prompt Design Guidelines
 
-- **Clear modes**: Define distinct operational modes with specific goals and outputs
-- **Specific citations**: Always require framework clause numbers, not vague references
-- **Uncertainty handling**: Agents should ask clarifying questions, not speculate
-- **British English**: All content should use British English spellings
-- **Validation tests**: Include at least 5 tests to verify agent behaviour
+- **Short and focused** — target ≤700 words. The model already knows what frameworks are; don't teach them.
+- **Specific citations** — always require framework clause numbers (e.g., CAF B2.a), not vague references.
+- **Uncertainty handling** — prompts should make the agent ask clarifying questions, not speculate.
+- **British English** — all content uses British English spellings.
+- **Validation tests** — include at least 5 representative tests in the README.
 
 ---
 
@@ -111,6 +93,8 @@ To add a new agent:
 
 | Version | Date | Notes |
 |---------|------|-------|
+| v2.4 | May 2026 | Refocused as chat-paste prompts (not Copilot Studio agents): aggressively slimmed every `instructions.md` to ≤800 words; removed framework reference tables, methodology tutorials, and tooling lists that the model already knows; reframed READMEs for chat-paste; restored single Cloud Security Expert |
+| v2.3 | May 2026 | (Superseded by v2.4 — was a Copilot Studio-oriented expansion based on a misunderstood deployment target) |
 | v2.2 | April 2026 | Added Security Case Populator agent |
 | v2.1 | April 2026 | Added Evidence Tracker Populator agent |
 | v2.0 | January 2026 | Restructured as multi-agent repository; added Government Assurance Advisor |

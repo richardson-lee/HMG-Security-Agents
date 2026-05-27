@@ -1,24 +1,19 @@
-# Government Assurance Advisor Agent
+# Government Assurance Advisor
 
-A Copilot Studio agent for UK public sector cyber security work: GovAssure scoping, CAF assessments, Secure by Design reviews, and framework mapping.
+A prompt for Microsoft Copilot covering UK public sector cyber security work: GovAssure scoping, CAF assessments, and Secure by Design reviews.
+
+For cross-framework mapping (CAF ↔ ISO ↔ CIS ↔ NIST CSF), use the [Security Requirements Analyst](../security-requirements-analyst/) — that's the canonical owner.
 
 ---
 
-## Setup
+## How to use
 
-1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/)
-2. Create a new agent
-3. Copy the contents of [`instructions.md`](instructions.md) into the **Instructions** field
-4. (Optional) Upload relevant policy documents to the agent's **Knowledge**
-5. Publish and share with your team
+1. Open a new Microsoft Copilot chat.
+2. Paste the contents of [`instructions.md`](instructions.md) as your first message.
+3. Attach any policy documents, prior CAF assessments, or Secure by Design self-assessments you have.
+4. Ask a question — see Starter Prompts below.
 
-### Alternative: Paste into Regular Copilot Chat
-
-If agents are disabled in your environment:
-
-1. Open a new chat in Microsoft Copilot
-2. Paste the contents of [`instructions.md`](instructions.md) at the start
-3. Continue chatting — Copilot will follow these instructions for the rest of the session
+You'll need to paste the prompt again at the start of each new chat.
 
 ---
 
@@ -26,94 +21,83 @@ If agents are disabled in your environment:
 
 | Prompt | What it does |
 |--------|--------------|
-| *"Help me scope our essential services using the Five Lenses approach"* | Guides through GovAssure scoping (Mode 1) |
-| *"Assess our current state against CAF Objective B"* | Gap analysis against CAF principles (Mode 2) |
-| *"Review this project against Secure by Design principles"* | SbD compliance review (Mode 3) |
-| *"Map CAF requirements to ISO 27002:2022 controls"* | Cross-framework mapping (Mode 4) |
-
----
-
-## Modes
-
-| Mode | Purpose |
-|------|---------|
-| **Scope Essential Services** | Five Lenses approach for identifying GovAssure scope |
-| **Assess Against CAF** | Gap analysis against Cyber Assessment Framework |
-| **Review Secure by Design** | Project assessment against 10 SbD principles |
-| **Map Frameworks** | Cross-reference CAF, ISO 27002, CIS, NIST CSF |
+| *"Help me scope our essential services using the Five Lenses approach."* | GovAssure scoping |
+| *"Assess our current state against CAF Objective B."* | CAF gap analysis |
+| *"Review this project against Secure by Design principles."* | SbD review |
+| *"What's new in CAF 4.0 and how does it relate to GovAssure 2025-26?"* | Version awareness |
 
 ---
 
 ## Validation Tests
 
-### Test 1: Five Lenses Scoping (Mode 1)
+### Test 1: Five Lenses Scoping
 ```
 We need to identify which systems are in scope for GovAssure. Start by helping me identify our essential services.
 ```
-**Expected**: Should start with Lens 1 questions about citizen impact, legal mandates, CNI. Should NOT jump straight to listing systems.
+**Expected**: Starts with Lens 1 questions (citizen impact, legal mandates, CNI). Does NOT jump to listing systems.
 
-### Test 2: Framework Citation (Core Rule)
+### Test 2: Framework Citation
 ```
 What CAF requirements apply to identity and access management?
 ```
-**Expected**: Specific citations like "CAF B2.a", "CAF B2.b", not vague references to "CAF access control requirements".
+**Expected**: Specific clauses (e.g., "CAF B2.a"), not vague references.
 
-### Test 3: CAF Assessment (Mode 2)
+### Test 3: CAF Assessment
 ```
-Assess our current state against CAF principle A3 (Asset Management). We have a CMDB but it's not complete, and we don't have a data inventory.
+Assess our current state against CAF principle A3. We have a CMDB but it's not complete, and we don't have a data inventory.
 ```
-**Expected**: Should assess as "Partially Achieved" with specific gaps identified. Should reference A3.a, A3.b, A3.c contributing outcomes.
+**Expected**: "Partially Achieved" with specific gaps. References A3.a, A3.b, A3.c outcomes.
 
-### Test 4: Secure by Design Review (Mode 3)
+### Test 4: Secure by Design Review
 ```
-We're in Alpha phase of a new citizen-facing digital service. Review our approach against Secure by Design principles.
+We're in Alpha phase of a new citizen-facing digital service. Review our approach against Secure by Design.
 ```
-**Expected**: Should ask about threat modelling, architecture options, control selection. Should assess confidence profile.
+**Expected**: Asks about threat modelling, architecture options, control selection. Assesses confidence profile.
 
 ### Test 5: Achievement Level Justification
 ```
 We have security policies but they were last reviewed 3 years ago and staff aren't aware of them. What's the CAF B1 achievement level?
 ```
-**Expected**: Should assess as "Partially Achieved" or "Not Achieved" with clear justification. Should not inflate to "Achieved".
+**Expected**: "Partially Achieved" or "Not Achieved" with justification. Does NOT inflate to "Achieved".
 
-### Test 6: Proportionality (Core Rule)
+### Test 6: Proportionality
 ```
-What's the minimum we need to achieve "Achieved" for CAF C1 (Security Monitoring)?
+What's the minimum we need to achieve "Achieved" for CAF C1?
 ```
-**Expected**: Should give proportionate guidance based on risk, not gold-plated recommendations. Should distinguish baseline from enhanced profiles.
+**Expected**: Proportionate guidance based on risk, not gold-plated. Distinguishes Baseline from Enhanced profile.
 
 ### Test 7: Uncertainty Handling
 ```
 Would our current setup meet GovAssure requirements?
 ```
-**Expected**: Should ask clarifying questions about what "current setup" includes. Should NOT make assumptions.
+**Expected**: Asks clarifying questions about what "current setup" includes. Does NOT make assumptions.
 
-### Test 8: Framework Mapping (Mode 4)
+### Test 8: Framework Mapping — refer out
 ```
-I need to show how our CAF-based controls also satisfy ISO 27001 requirements for an audit.
+Map our CAF-based controls to ISO 27001.
 ```
-**Expected**: Mapping table with specific clause numbers. Should note where mappings are approximate.
+**Expected**: Points to the Security Requirements Analyst as the canonical mapping owner. A brief headline mapping for specific clauses is acceptable.
 
-### Test 9: Scoping Pitfall Warning
+### Test 9: Scoping Pitfall
 ```
 Here are the 50 systems we've identified for GovAssure scope: [list]
 ```
-**Expected**: Should ask about essential services first. Should warn about bottom-up scoping pitfall.
+**Expected**: Asks about essential services first. Warns about bottom-up scoping.
 
 ### Test 10: Version Awareness
 ```
 What's in CAF 4.0?
 ```
-**Expected**: Should mention threat intelligence (A2.b), threat hunting (C2.b), AI risk. Should note GovAssure 2025-26 uses CAF 3.2.
+**Expected**: Mentions threat intelligence, threat hunting, AI risk. Notes GovAssure 2025-26 uses CAF 3.2.
 
 ---
 
 ## Troubleshooting
 
-| Problem | Fix |
-|---------|-----|
-| Not citing specific clauses | Add: *"Always cite the specific contributing outcome, e.g., CAF B2.a, not just the principle."* |
-| Gold-plating recommendations | Add: *"Be proportionate. Recommend what's needed for the risk level, not best practice in all cases."* |
-| Skipping to systems in scoping | Add: *"Always start Five Lenses with essential services. Never start with systems."* |
-| Not distinguishing profiles | Add: *"Always clarify whether baseline or enhanced profile applies before assessing."* |
-| Speculating on compliance | Add: *"Never speculate. If evidence is insufficient, state what's needed to assess."* |
+| Problem | Add to the prompt |
+|---------|-------------------|
+| Not citing specific clauses | *"Always cite the specific contributing outcome, e.g., CAF B2.a, not just the principle."* |
+| Gold-plating | *"Be proportionate. Recommend what's needed for the risk level, not best practice in all cases."* |
+| Skipping to systems in scoping | *"Always start Five Lenses with essential services. Never start with systems."* |
+| Not distinguishing profiles | *"Always clarify whether Baseline or Enhanced profile applies before assessing."* |
+| Speculating on compliance | *"Never speculate. If evidence is insufficient, state what's needed to assess."* |
