@@ -108,8 +108,14 @@ To add a new agent:
 - [GovAssure Overview](https://www.security.gov.uk/policy-and-guidance/govassure/)
 - [NCSC Cyber Assessment Framework](https://www.ncsc.gov.uk/collection/cyber-assessment-framework)
 - [Secure by Design](https://www.security.gov.uk/policy-and-guidance/secure-by-design/)
-- [Microsoft Copilot Studio](https://copilotstudio.microsoft.com/)
+- [Microsoft Copilot](https://copilot.microsoft.com/)
 
 ---
 
-*Created with assistance from Claude. Optimised for Microsoft Copilot Studio.*
+## Licence
+
+Released under the [MIT Licence](LICENSE).
+
+---
+
+*Created with assistance from Claude.*
