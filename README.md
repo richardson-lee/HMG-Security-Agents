@@ -4,6 +4,27 @@ A collection of Microsoft Copilot prompts for UK public sector security work —
 
 ---
 
+## Pick an agent
+
+| If you want to… | Use |
+|-----------------|-----|
+| Compare a supplier's response against your security baseline | [Security Requirements Analyst](agents/security-requirements-analyst/) |
+| Write security requirements for a new system or procurement | [Security Requirements Analyst](agents/security-requirements-analyst/) |
+| Map between CAF, ISO 27002, CIS Controls, or NIST CSF | [Security Requirements Analyst](agents/security-requirements-analyst/) |
+| Scope your essential services for GovAssure (Five Lenses) | [Government Assurance Advisor](agents/gov-assurance-advisor/) |
+| Run a CAF gap analysis or set achievement levels | [Government Assurance Advisor](agents/gov-assurance-advisor/) |
+| Review a project against Secure by Design | [Government Assurance Advisor](agents/gov-assurance-advisor/) |
+| Review a cloud architecture against the NCSC Cloud Principles | [Cloud Security Expert](agents/cloud-security-expert/) |
+| Design cloud detection rules or assess logging coverage | [Cloud Security Expert](agents/cloud-security-expert/) |
+| Plan a secure cloud migration or DevSecOps pipeline | [Cloud Security Expert](agents/cloud-security-expert/) |
+| Triage or respond to a cloud security incident | [Cloud Security Expert](agents/cloud-security-expert/) |
+| Fill the HMG Security Requirements Evidence Tracker from supplier docs | [Evidence Tracker Populator](agents/evidence-tracker-populator/) |
+| Draft a DBS Security Case from a threat model and evidence pack | [Security Case Populator](agents/security-case-populator/) |
+
+If your task spans agents (e.g. assess a supplier *then* fill the evidence tracker *then* draft the security case), use them in that order — each is designed to consume the previous one's output.
+
+---
+
 ## Available Agents
 
 | Agent | Purpose | Link |
